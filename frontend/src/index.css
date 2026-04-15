@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg:          #FAFAF7;
+  --surface:     #FFFFFF;
+  --surface-alt: #F3F2EE;
+  --border:      #E5E4DF;
+  --text:        #1F1F1F;
+  --text-muted:  #6B6B6B;
+  --accent:      #2E5CFF;
+  --accent-soft: #E8EEFF;
+  --success:     #0A7D3E;
+  --warning:     #B76E00;
+  --danger:      #C0392B;
+  --running:     #8A4FFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:          #0E0E0E;
+    --surface:     #1A1A1A;
+    --surface-alt: #242424;
+    --border:      #2E2E2E;
+    --text:        #EDEDED;
+    --text-muted:  #888888;
+    --accent:      #5B82FF;
+    --accent-soft: #1A2140;
+    --success:     #2DBA6E;
+    --warning:     #E8A040;
+    --danger:      #E05252;
+    --running:     #A46EFF;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root { height: 100dvh; display: flex; flex-direction: column; }
+
+/* ── Running pulse animation ───────────────────────────────── */
+@keyframes pulse-border {
+  0%, 100% { border-left-color: var(--running); opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.running-pulse {
+  border-left: 3px solid var(--running) !important;
+  animation: pulse-border 1.8s ease-in-out infinite;
+}
+
+/* ── Spinner ───────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.8s linear infinite; display: inline-block; }
+
+/* ── Log tail ──────────────────────────────────────────────── */
+.log-tail {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: var(--surface-alt);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 8px 10px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
